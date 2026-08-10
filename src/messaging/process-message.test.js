@@ -5,7 +5,6 @@ import { metricsCounter } from '../common/helpers/metrics.js'
 const { moveClaimToPaidMsgType } = config.get('messageTypes')
 
 jest.mock('./application/set-payment-status-to-paid.js')
-jest.mock('./application/process-redact-pii.js')
 jest.mock('./application/process-reminder-email.js')
 jest.mock('../common/helpers/metrics.js')
 
