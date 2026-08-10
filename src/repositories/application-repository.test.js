@@ -185,19 +185,8 @@ describe('application-repository', () => {
       expect(dbMock.collection().updateOne).toHaveBeenCalledTimes(1)
       expect(dbMock.collection().updateOne).toHaveBeenCalledWith(
         { reference: 'IAHW-5BA2-6DFD' },
-        // TODO replace this is condition that checks application history
-        // { $set: { reminders: 'notClaimed_nineMonths' } }
         {}
       )
-      // expect(models.application_update_history.create).toHaveBeenCalledWith({
-      //   eventType: 'application-reminders',
-      //   updatedProperty: 'reminders',
-      //   note: 'Reminder sent',
-      //   applicationReference: 'IAHW-5BA2-6DFD',
-      //   newValue: 'notClaimed_nineMonths',
-      //   oldValue: undefined,
-      //   createdBy: 'admin'
-      // })
       expect(mockLogger.info).toHaveBeenCalledTimes(1)
       expect(mockLogger.info).toHaveBeenCalledWith(
         'Successfully updated reminders, rows affected: 1'

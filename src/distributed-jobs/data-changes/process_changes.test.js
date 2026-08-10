@@ -53,30 +53,6 @@ const changeOfDataField = {
   action: TYPE_OF_CHANGE.FIELD_CHANGE
 }
 
-// const skipDataChange = {
-//   claimRef: 'RESH-VASQ-XIXS',
-//   sbi: '107695939',
-//   applicationRef: 'IAHW-21C5-1417',
-//   field: 'dateOfTesting',
-//   newValue: '2025-12-12T00:00:00.000Z',
-//   oldValue: '2025-12-11T00:00:00.000Z',
-//   skipDataChange: true,
-//   action: TYPE_OF_CHANGE.FIELD_CHANGE
-// }
-
-// const skipSendEvent = {
-//   claimRef: 'REBC-CBLH-B5BB',
-//   sbi: '106275882',
-//   applicationRef: 'IAHW-LTYF-KXEC',
-//   field: 'dateOfTesting',
-//   newValue: '2025-06-02T00:00:00.000Z',
-//   oldValue: '2025-06-01T00:00:00.000Z',
-//   skipSendEvent: true,
-//   action: TYPE_OF_CHANGE.FIELD_CHANGE
-// }
-
-// const input_data = [deletion, herdChange, changeOfDataField, skipDataChange, skipSendEvent]
-
 const mockPublishEvent = jest.fn()
 
 beforeEach(() => {
