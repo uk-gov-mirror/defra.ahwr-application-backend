@@ -247,114 +247,6 @@ export const findApplication = async (db, reference) => {
   return db.collection(APPLICATION_COLLECTION).findOne({ reference })
 }
 
-export const getApplicationsToRedactOlderThan = async (_years) => {
-  // TODO: 1495 impl
-  return []
-  // const now = new Date()
-  // const cutoffDate = new Date(
-  //   Date.UTC(now.getUTCFullYear() - years, now.getUTCMonth(), now.getUTCDate())
-  // )
-
-  // return models.application.findAll({
-  //   where: {
-  //     reference: {
-  //       [Op.notIn]: Sequelize.literal(
-  //         '(SELECT reference FROM application_redact)'
-  //       )
-  //     },
-  //     createdAt: {
-  //       [Op.lt]: cutoffDate
-  //     },
-  //     eligiblePiiRedaction: {
-  //       [Op.eq]: true
-  //     }
-  //   },
-  //   attributes: [
-  //     'reference',
-  //     [literal("data->'organisation'->>'sbi'"), 'sbi'],
-  //     'statusId'
-  //   ],
-  //   order: [['createdAt', 'ASC']]
-  // })
-}
-
-export const getOWApplicationsToRedactLastUpdatedBefore = async (_years) => {
-  // TODO: 1495 impl
-  return []
-  // const now = new Date()
-  // const cutoffDate = new Date(
-  //   Date.UTC(now.getUTCFullYear() - years, now.getUTCMonth(), now.getUTCDate())
-  // )
-
-  // return models.application.findAll({
-  //   where: {
-  //     reference: {
-  //       [Op.notIn]: Sequelize.literal(
-  //         '(SELECT reference FROM application_redact)'
-  //       )
-  //     },
-  //     updatedAt: {
-  //       [Op.lt]: cutoffDate
-  //     },
-  //     eligiblePiiRedaction: {
-  //       [Op.eq]: true
-  //     },
-  //     type: 'VV'
-  //   },
-  //   attributes: ['reference', [literal("data->'organisation'->>'sbi'"), 'sbi']],
-  //   order: [['updatedAt', 'ASC']]
-  // })
-}
-
-export const redactApplicationPII = async (_agreementReference, _logger) => {
-  // TODO: 1495 impl
-  // const redactedValueByJSONPath = {
-  //   'organisation,name': REDACT_PII_VALUES.REDACTED_NAME,
-  //   'organisation,email': REDACT_PII_VALUES.REDACTED_EMAIL,
-  //   'organisation,orgEmail': REDACT_PII_VALUES.REDACTED_ORG_EMAIL,
-  //   'organisation,farmerName': REDACT_PII_VALUES.REDACTED_FARMER_NAME,
-  //   'organisation,address': REDACT_PII_VALUES.REDACTED_ADDRESS
-  // }
-  // let totalUpdates = 0
-  // for (const [jsonPath, redactedValue] of Object.entries(
-  //   redactedValueByJSONPath
-  // )) {
-  //   const jsonPathSql = jsonPath
-  //     .split(',')
-  //     .map((key) => `->'${key}'`)
-  //     .join('')
-  //   const [affectedCount] = await models.application.update(
-  //     {
-  //       data: Sequelize.fn(
-  //         'jsonb_set',
-  //         Sequelize.col('data'),
-  //         Sequelize.literal(`'{${jsonPath}}'`),
-  //         Sequelize.literal(`'"${redactedValue}"'`),
-  //         true
-  //       ),
-  //       updatedBy: 'admin',
-  //       updatedAt: Sequelize.fn('NOW')
-  //     },
-  //     {
-  //       where: {
-  //         reference: agreementReference,
-  //         [Op.and]: Sequelize.literal(`data${jsonPathSql} IS NOT NULL`)
-  //       }
-  //     }
-  //   )
-  //   totalUpdates += affectedCount
-  // }
-  // if (totalUpdates > 0) {
-  //   logger.info(
-  //     `Redacted ${totalUpdates} application records for agreementReference: ${agreementReference}`
-  //   )
-  // } else {
-  //   logger.info(
-  //     `No records updated for agreementReference: ${agreementReference}`
-  //   )
-  // }
-}
-
 export const getApplicationsBySbi = async (db, sbi) => {
   return getApplicationsFromCollectionBySbi(db, sbi, APPLICATION_COLLECTION)
 }
@@ -397,16 +289,10 @@ export const getRemindersToSend = async (
     `Getting reminders due, reminder type '${reminderType}', window start '${reminderWindowStartDate}', end '${reminderWindowEndDate}' and haven't already received later reminders '${laterReminders?.join(',')}'`
   )
 
-  // const reminderTypesToExclude = laterReminders
-  //   ? [reminderType, ...laterReminders]
-  //   : [reminderType]
-
   const baseQuery = {
     type: 'EE',
     statusId: { $ne: STATUS.NOT_AGREED },
     createdAt: { $lte: reminderWindowStartDate }
-    // TODO replace this is condition that checks application history
-    // reminders: { $nin: reminderTypesToExclude }
   }
   const query = reminderWindowEndDate
     ? {
@@ -458,18 +344,8 @@ export const getRemindersToSend = async (
 export const updateReminders = async (reference, _newReminder, _oldReminder, db, logger) => {
   const filter = { reference }
   // TODO replace this is condition that checks application history
-  const updateDocument = {} // { $set: { reminders: newReminder } }
+  const updateDocument = {}
   // TODO add updated history to above!
-  // await models.application_update_history.create({
-  //     applicationReference: reference,
-  //     note: 'Reminder sent',
-  //     updatedProperty,
-  //     newValue: newReminder,
-  //     oldValue: oldReminder,
-  //     eventType: type,
-  //     createdBy: 'admin'
-  //   })
-  // }
 
   const result = db.collection(APPLICATION_COLLECTION).updateOne(filter, updateDocument)
 

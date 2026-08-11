@@ -105,18 +105,6 @@ describe('processReminderEmailRequest', () => {
     expect(mockLogger.info).toHaveBeenCalledTimes(2)
     expect(mockLogger.info).toHaveBeenCalledWith('Processing reminders request started..')
     expect(mockLogger.info).toHaveBeenCalledWith('Successfully processed reminders request')
-    // expect(sendMessageToSNS).toHaveBeenCalledTimes(1)
-    // expect(sendMessageToSNS).toHaveBeenCalledWith(
-    //   reminderRequestedTopicArn,
-    //   {
-    //     agreementReference: 'IAHW-BEKR-AWIU',
-    //     crn: '1100407200',
-    //     sbi: '106282723',
-    //     emailAddresses: ['dummy@example.com'],
-    //     reminderType: threeMonths
-    //   },
-    //   { messageType: messageGeneratorMsgTypeReminder }
-    // )
     expect(mockPublishEvent).toHaveBeenCalledTimes(1)
     expect(updateReminders).toHaveBeenCalledTimes(1)
     expect(updateReminders).toHaveBeenCalledWith(
@@ -151,18 +139,6 @@ describe('processReminderEmailRequest', () => {
     expect(mockLogger.info).toHaveBeenCalledTimes(2)
     expect(mockLogger.info).toHaveBeenCalledWith('Processing reminders request started..')
     expect(mockLogger.info).toHaveBeenCalledWith('Successfully processed reminders request')
-    // expect(sendMessageToSNS).toHaveBeenCalledTimes(1)
-    // expect(sendMessageToSNS).toHaveBeenCalledWith(
-    //   reminderRequestedTopicArn,
-    //   {
-    //     agreementReference: 'IAHW-BEKR-AWIU',
-    //     crn: '1100407200',
-    //     sbi: '106282723',
-    //     emailAddresses: ['dummy1@example.com', 'dummy2@example.com'],
-    //     reminderType: sixMonths
-    //   },
-    //   { messageType: messageGeneratorMsgTypeReminder }
-    // )
     expect(mockPublishEvent).toHaveBeenCalledTimes(1)
     expect(updateReminders).toHaveBeenCalledTimes(1)
     expect(updateReminders).toHaveBeenCalledWith(
@@ -322,7 +298,6 @@ describe('processReminderEmailRequest', () => {
 
     expect(getRemindersToSend).toHaveBeenCalledTimes(3)
     expect(mockLogger.info).toHaveBeenCalledTimes(2)
-    // expect(sendMessageToSNS).toHaveBeenCalledTimes(5)
     expect(mockPublishEvent).toHaveBeenCalledTimes(5)
     expect(updateReminders).toHaveBeenCalledTimes(5)
   })
@@ -347,7 +322,6 @@ describe('processReminderEmailRequest', () => {
     expect(getRemindersToSend).toHaveBeenCalledTimes(3)
     expect(mockLogger.info).toHaveBeenCalledTimes(1)
     expect(mockLogger.info).toHaveBeenCalledWith('Processing reminders request started..')
-    // expect(sendMessageToSNS).toHaveBeenCalledTimes(1)
     expect(mockLogger.error).toHaveBeenCalledTimes(1)
     expect(mockLogger.error).toHaveBeenCalledWith(
       expect.any(Object),

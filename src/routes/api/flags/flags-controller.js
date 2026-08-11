@@ -89,20 +89,5 @@ export const createFlagHandler = async (request, h) => {
 
   owAppRef ? await createOWFlag(db, ref, data) : await createFlag(db, ref, data)
 
-  // await raiseApplicationFlaggedEvent(
-  //   {
-  //     application: { id: application.reference },
-  //     message: 'Application flagged',
-  //     flag: {
-  //       id: result.dataValues.id,
-  //       note: result.dataValues.note,
-  //       appliesToMh: result.dataValues.appliesToMh
-  //     },
-  //     raisedBy: result.dataValues.createdBy,
-  //     raisedOn: result.dataValues.createdAt
-  //   },
-  //   sbi
-  // )
-
   return h.response().code(HttpStatus.CREATED)
 }

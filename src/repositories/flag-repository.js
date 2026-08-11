@@ -1,4 +1,3 @@
-// import { REDACT_PII_VALUES } from 'ffc-ahwr-common-library'
 import { APPLICATION_COLLECTION, OW_APPLICATION_COLLECTION } from '../constants/index.js'
 
 export const getAllFlags = async (db) => {
@@ -44,40 +43,4 @@ export const getAllFlags = async (db) => {
       }
     ])
     .toArray()
-}
-
-export const redactFlagPII = async (_applicationReference) => {
-  // TODO: 1495 impl
-  // await models.flag.update(
-  //   {
-  //     note: `${REDACT_PII_VALUES.REDACTED_NOTE}`,
-  //     updatedBy: 'admin',
-  //     updatedAt: Date.now()
-  //   },
-  //   {
-  //     where: {
-  //       applicationReference,
-  //       note: { [Op.not]: null }
-  //     }
-  //   }
-  // )
-}
-
-export const createFlagForRedactPII = async (_data) => {
-  // TODO: 1495 impl
-  return {}
-
-  // const existingAppliesToMhFlag = await getFlagByAppRef(
-  //   data.applicationReference,
-  //   false
-  // )
-  // if (existingAppliesToMhFlag) {
-  //   await deleteFlag(
-  //     existingAppliesToMhFlag.id,
-  //     'admin',
-  //     "Deleted to allow 'Redact PII' flag to be added, only one flag with appliesToMh=false allowed."
-  //   )
-  // }
-
-  // return createFlag(data)
 }

@@ -12,6 +12,7 @@ export const runDistributedStartupJobInBackground = async (db, logger) => {
   }
 }
 
+// eslint-disable-next-line no-commented-code/no-commented-code
 /**
  * @param {object} db
  * @param {object} logger

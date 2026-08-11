@@ -1,5 +1,3 @@
-// import { REDACT_PII_VALUES } from 'ffc-ahwr-common-library
-
 export const getAllByApplicationReference = async (db, applicationReference, collection) => {
   return db.collection(collection).findOne(
     { reference: applicationReference },
@@ -34,41 +32,4 @@ export const updateApplicationValuesAndContactHistory = async ({
     },
     { returnDocument: 'after' }
   )
-}
-
-export const redactContactHistoryPII = async (_applicationReference, _logger) => {
-  // TODO: 1495 impl
-  return {}
-
-  // const data = Sequelize.fn(
-  //   'jsonb_set',
-  //   Sequelize.fn(
-  //     'jsonb_set',
-  //     Sequelize.col('data'),
-  //     Sequelize.literal("'{newValue}'"),
-  //     Sequelize.literal(`'"${REDACT_PII_VALUES.REDACTED_MULTI_TYPE_VALUE}"'`)
-  //   ),
-  //   Sequelize.literal("'{oldValue}'"),
-  //   Sequelize.literal(`'"${REDACT_PII_VALUES.REDACTED_MULTI_TYPE_VALUE}"'`)
-  // )
-  // const [, updatedRows] = await models.contact_history.update(
-  //   {
-  //     data,
-  //     updatedBy: 'admin',
-  //     updatedAt: Date.now()
-  //   },
-  //   {
-  //     where: {
-  //       applicationReference
-  //     },
-  //     returning: true
-  //   }
-  // )
-
-  // updatedRows.forEach((row) => {
-  //   const appRef = row.applicationReference
-  //   const fieldValue = row.data?.field
-
-  //   logger.info(`Redacted ${fieldValue} in ${appRef}`)
-  // })
 }
