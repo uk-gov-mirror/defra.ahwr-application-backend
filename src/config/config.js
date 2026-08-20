@@ -8,7 +8,6 @@ convict.addFormats(convictFormatWithValidator)
 const isProduction = process.env.NODE_ENV === 'production'
 const usePrettyPrint = process.env.USE_PRETTY_PRINT === 'true'
 const msgTypePrefix = 'uk.gov.ffc.ahwr'
-const defaultServiceUri = 'http://localhost:3002'
 export const defaultApiKey = 'c19fcb0d-a6d2-4d9e-9325-16d44ddc0724'
 
 const config = convict({
@@ -73,42 +72,11 @@ const config = convict({
     format: String,
     default: 'ahwr-application-backend'
   },
-  uris: {
-    documentGeneratorApiUri: {
-      doc: 'Api Uri for Document Generator Service',
-      format: String,
-      default: defaultServiceUri,
-      env: 'DOCUMENT_GENERATOR_SERVICE_URI'
-    },
-    sfdMessagingProxyApiUri: {
-      doc: 'Api Uri for Sfd Mesaging Proxy Service',
-      format: String,
-      default: defaultServiceUri,
-      env: 'SFD_MESSAGING_PROXY_SERVICE_URI'
-    },
-    messageGeneratorApiUri: {
-      doc: 'Api Uri for Message Generator Service',
-      format: String,
-      default: defaultServiceUri,
-      env: 'MESSAGE_GENERATOR_SERVICE_URI'
-    }
-  },
   cdpEnvironment: {
     doc: 'The CDP environment the app is running in. With the addition of "local" for local development',
     format: ['local', 'infra-dev', 'management', 'dev', 'test', 'perf-test', 'ext-test', 'prod'],
     default: 'local',
     env: 'ENVIRONMENT'
-  },
-  env: {
-    doc: 'The Node environment',
-    format: ['development', 'test', 'production'],
-    default: 'development',
-    env: 'NODE_ENV'
-  },
-  isDev: {
-    doc: 'The Node environment',
-    format: Boolean,
-    default: process.env.NODE_ENV === 'development'
   },
   log: {
     level: {
